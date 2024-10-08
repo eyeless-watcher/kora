@@ -22,7 +22,7 @@ public abstract class KoraQuartzJob implements Job {
     }
 
     @Override
-    public final void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+    public final void execute(JobExecutionContext jobExecutionContext) {
         MDC.clear();
         Context.clear();
 
@@ -33,7 +33,7 @@ public abstract class KoraQuartzJob implements Job {
             telemetryCtx.close(null);
         } catch (Exception e) {
             telemetryCtx.close(e);
-            throw new JobExecutionException(e);
+            throw e;
         }
     }
 
